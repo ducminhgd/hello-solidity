@@ -1,0 +1,25 @@
+{
+  "name": "hello-solidity",
+  "version": "1.0.0",
+  "description": "A project using solidity for blockchain",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ducminhgd/hello-solidity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ducminhgd/hello-solidity/issues"
+  },
+  "homepage": "https://github.com/ducminhgd/hello-solidity#readme",
+  "devDependencies": {
+    "hardhat": "^2.6.8"
+  }
+}
