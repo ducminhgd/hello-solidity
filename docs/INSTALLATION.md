@@ -31,7 +31,7 @@ Run `npm init` and follow instructions, for example:
     keywords: Solidity,hello-world
     author: MinhGDD
     license: (ISC)
-    About to write to D:\personal\blockchain\hello-solidity\package.json:
+    About to write to hello-solidity\package.json:
 
     {
     "name": "hello-solidity",
@@ -67,3 +67,7 @@ Run `npm init` and follow instructions, for example:
 Run `npm install --save-dev hardhat` to install Hardhat.
 
 Init Hardhat project, run `npx hardhat`
+
+Install Waffle for testing `npm install --save-dev @nomiclabs/hardhat-waffle 'ethereum-waffle@^3.0.0' @nomiclabs/hardhat-ethers 'ethers@^5.0.0'`. Note: *please keep in mind that use `"` instead of `'` for Windows*.
+
+Install *chai* `npm install --save-dev chai`
