@@ -1,21 +1,38 @@
-require("@nomiclabs/hardhat-waffle");
+/* hardhat.config.js */
+require('dotenv').config();
 
-// This is a sample Hardhat task. To learn how to create your own go to
-// https://hardhat.org/guides/create-task.html
-task("accounts", "Prints the list of accounts", async (taskArgs, hre) => {
-  const accounts = await hre.ethers.getSigners();
+require("@nomiclabs/hardhat-waffle")
+require("@nomiclabs/hardhat-etherscan");
+require("@nomiclabs/hardhat-ethers");
 
-  for (const account of accounts) {
-    console.log(account.address);
-  }
-});
+require('@openzeppelin/hardhat-upgrades');
 
-// You need to export an object to set up your config
-// Go to https://hardhat.org/config/ to learn more
+const privateKey = process.env.SECRET || "6ca7c7c571215dcdc5256fe9606fc791c9e4d432bce7ef3245a4f1102bf49ba2"
 
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
 module.exports = {
-  solidity: "0.8.4",
-};
+  defaultNetwork: "hardhat",
+  networks: {
+    hardhat: {
+      chainId: 1337
+    },
+    ropsten: {
+      chainId: 3,
+      url: "https://ropsten.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+      accounts: [privateKey]
+    }
+  },
+  solidity: {
+    version: "0.8.4",
+    settings: {
+      optimizer: {
+        enabled: true,
+        runs: 200
+      }
+    }
+  },
+  etherscan: {
+    // Your API key for Etherscan
+    // Obtain one at https://etherscan.io/
+    apiKey: "PPXEB2JF9BQJIFTJ2KG4GNTH4XJZGF1456"
+  }
+}

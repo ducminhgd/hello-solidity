@@ -1,27 +1,46 @@
-// We require the Hardhat Runtime Environment explicitly here. This is optional
-// but useful for running the script in a standalone fashion through `node <script>`.
-//
-// When running the script with `npx hardhat run <script>` you'll find the Hardhat
-// Runtime Environment's members available in the global scope.
-const hre = require("hardhat");
+const { ethers, upgrades } = require("hardhat");
+const { getImplementationAddress } = require("@openzeppelin/upgrades-core");
 
+// upgradeable deploy
 async function main() {
-  const NFTMarket = await hre.ethers.getContractFactory("NFTMarket");
-  const nftMarket = await NFTMarket.deploy();
-  await nftMarket.deployed();
-  console.log("nftMarket deployed to:", nftMarket.address);
+  const tokenAddress = "0xf740E266a17918c20cE2dd40eEfad2B2f8Dacb45";
+  const Market = await ethers.getContractFactory("NFTMarket");
+  const marketProxy = await upgrades.deployProxy(Market, [tokenAddress]);
+  await marketProxy.deployed();
+  console.log("nftMarket deployed to:", marketProxy.address);
+
+  const nftMarketImplAddress = await getImplementationAddress(
+    marketProxy.provider,
+    marketProxy.address
+  );
+  await hre.run("verify:verify", { address: nftMarketImplAddress });
+  console.log("nftMarket verify:", nftMarketImplAddress);
 
   const NFT = await hre.ethers.getContractFactory("NFT");
-  const nft = await NFT.deploy(nftMarket.address);
-  await nft.deployed();
-  console.log("nft deployed to:", nft.address);
+  const nftProxy = await upgrades.deployProxy(NFT, [marketProxy.address]);
+  await nftProxy.deployed();
+  console.log("nft deployed to:", nftProxy.address);
+
+  const nftImplAddress = await getImplementationAddress(
+    nftProxy.provider,
+    nftProxy.address
+  );
+  await hre.run("verify:verify", { address: nftImplAddress });
+  console.log("nft verify:", nftImplAddress);
+
+  let config = `
+  export const nftmarketaddress = "${marketProxy.address}"
+  export const nftaddress = "${nftProxy.address}"
+  `
+
+  let data = JSON.stringify(config)
+  fs.writeFileSync('config.js', JSON.parse(data))
+
 }
 
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
 main()
   .then(() => process.exit(0))
-  .catch((error) => {
+  .catch(error => {
     console.error(error);
     process.exit(1);
   });
