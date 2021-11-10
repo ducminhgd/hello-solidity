@@ -3,22 +3,41 @@
 pragma solidity ^0.8.3;
 
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts-upgradeable/security/ReentrancyGuardUpgradeable.sol";
 
 import "hardhat/console.sol";
 
-contract NFTMarket is ReentrancyGuard {
+contract NFTMarket is ReentrancyGuardUpgradeable {
     using Counters for Counters.Counter;
     Counters.Counter private _itemIds;
     Counters.Counter private _itemsSold;
 
     address payable owner;
-    uint256 listingPrice = 0.025 ether;
+    uint256 listingPrice;
+    uint256 public totalVolume;
+    IERC20 public marketToken;
+    address public marketWallet;
 
-    constructor() {
+
+    // constructor() {
+    //     owner = payable(msg.sender);
+    // }
+
+    function initialize(IERC20 _marketToken) public initializer {
         owner = payable(msg.sender);
+        listingPrice = 1 * 10**18;
+        totalVolume = 0;
+        marketToken = IERC20(
+            address(0x5FC8d32690cc91D4c39d9d3abcBD16989F875707)
+        );
+
+        marketWallet = payable(msg.sender);
     }
+
+
 
     struct MarketItem {
         uint256 itemId;

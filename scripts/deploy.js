@@ -3,7 +3,7 @@ const { getImplementationAddress } = require("@openzeppelin/upgrades-core");
 
 // upgradeable deploy
 async function main() {
-  const tokenAddress = "0xf740E266a17918c20cE2dd40eEfad2B2f8Dacb45";
+  const tokenAddress = "0x5FC8d32690cc91D4c39d9d3abcBD16989F875707";
   const Market = await ethers.getContractFactory("NFTMarket");
   const marketProxy = await upgrades.deployProxy(Market, [tokenAddress]);
   await marketProxy.deployed();

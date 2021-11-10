@@ -64,10 +64,14 @@ Run `npm init` and follow instructions, for example:
     Is this OK? (yes) yes
     ```
 
-Run `npm install --save-dev hardhat` to install Hardhat.
+## Required module
 
-Init Hardhat project, run `npx hardhat`
+- Hardhat for development environment.
+- Waffle and `chai` for testing
+- `dotenv` for using in `hardhat.config.js`
 
-Install Waffle for testing `npm install --save-dev @nomiclabs/hardhat-waffle 'ethereum-waffle@^3.0.0' @nomiclabs/hardhat-ethers 'ethers@^5.0.0'`. Note: *please keep in mind that use `"` instead of `'` for Windows*.
+```bash
+npm install --save-dev hardhat @nomiclabs/hardhat-waffle 'ethereum-waffle@^3.0.0' @nomiclabs/hardhat-ethers 'ethers@^5.0.0' @nomiclabs/hardhat-etherscan @openzeppelin/hardhat-upgrades chai dotenv @openzeppelin/contracts-upgradeable
+```
 
-Install *chai* `npm install --save-dev chai`
+*Notes: on Windows replace `'` with `"`*
