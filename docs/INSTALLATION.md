@@ -71,7 +71,7 @@ Run `npm init` and follow instructions, for example:
 - `dotenv` for using in `hardhat.config.js`
 
 ```bash
-npm install --save-dev hardhat @nomiclabs/hardhat-waffle 'ethereum-waffle@^3.0.0' @nomiclabs/hardhat-ethers 'ethers@^5.0.0' @nomiclabs/hardhat-etherscan @openzeppelin/hardhat-upgrades chai dotenv @openzeppelin/contracts-upgradeable
+npm install --save-dev hardhat @nomiclabs/hardhat-waffle 'ethereum-waffle@^3.0.0' @nomiclabs/hardhat-ethers 'ethers@^5.0.0' @nomiclabs/hardhat-etherscan @openzeppelin/hardhat-upgrades chai dotenv @openzeppelin/contracts-upgradeable fs
 ```
 
 *Notes: on Windows replace `'` with `"`*

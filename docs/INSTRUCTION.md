@@ -22,6 +22,7 @@
         }
         ```
     4. Using Metamask and create a new wallet
-4. Deploy:
+4. Go to https://faucet.rinkeby.io/ and follow instructions to get Faucet tokens
+5. Deploy:
    1. Localhost run `npx hardhat node` and open another terminal to run `npx hardhat run --network localhost scripts/deploy.js`
    2. Rinkeby: `npx hardhat run --network rinkeby scripts/deploy.js`

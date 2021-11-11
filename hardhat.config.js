@@ -16,9 +16,10 @@ module.exports = {
       chainId: 1337
     },
     // Register and create project on infura.io
+    // When run to testnet or main net, please go to Metamask: Settings > Networks > Rinkeby Network to get URL
     rinkeby: {
       chainId: 4,
-      url: "https://rinkeby.infura.io/v3/d8429a25f6f6474387180d3d635f3a12",
+      url: "https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
       accounts: [privateKey]
     }
   },
